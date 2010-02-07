@@ -1,4 +1,2 @@
 patron
-rack-cache
 memcached
-RMagick
