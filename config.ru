@@ -1,18 +1,18 @@
 #!/usr/bin/env rackup -s thin -E none
 
 require 'rubygems'
-# require 'rack/cache'
 require 'rack/contrib'
 
 $: << File.join(File.dirname(__FILE__), 'lib')
 require 'imagery'
-require 'config/env'
 
+ORIGIN_SERVER = 'lucidcode.co.nz'
+
+Logger.current = Logger.new env['rack.errors']
 
 use Rack::Config do |env|
   env['imagery.origin_host'] = ORIGIN_SERVER
 end
-
 
 # Add rack sendfile extension.
 # Allows us to serve cache hits directly from file system 
