@@ -9,7 +9,7 @@ end
 
 # Upstream Server where the assets live
 
-ORIGIN_SERVER = $settings['origin_server'] || 'shopify.s3.amazonaws.com'
+ORIGIN_SERVER = $settings['origin_server'] || 'lucidcode.co.nz'
 
 
 # Middleware configuration
@@ -26,6 +26,7 @@ ENV['ENTITY_STORE'] = "file:#{ENV['CACHE_LOCATION']}"
 if RACK_ENV == 'production'
   Logger.current = SyslogLogger.new('rack.imagery')  
 else
-  Logger.current = Logger.new(File.dirname(__FILE__) + "/../log/#{RACK_ENV}.log")
+  Logger.current = env['rack.errors']
+  # Logger.current = Logger.new(File.dirname(__FILE__) + "/../log/#{RACK_ENV}.log")
 end
 
