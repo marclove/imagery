@@ -6,28 +6,6 @@ require 'rack/contrib'
 $: << File.join(File.dirname(__FILE__), 'lib')
 require 'imagery'
 
-ORIGIN_SERVER = 'lucidcode.co.nz'
-
-Logger.current = Logger.new env['rack.errors']
-
-use Rack::Config do |env|
-  env['imagery.origin_host'] = ORIGIN_SERVER
-end
-
-# Add rack sendfile extension.
-# Allows us to serve cache hits directly from file system 
-# by nginx (big speed boost). read: 
-# http://github.com/rack/rack-contrib/blob/5ea5e585a43669842314aa07f1e603be70d6e288/lib/rack/contrib/sendfile.rb
-
-
-if ENV['NGINX_ACCEL_REDIRECTS']
-  STDERR.puts 'Using accel redirect (Shopify config).'
-  require 'imagery/middleware/accel_redirect'
-  use Imagery::AccelRedirect
-else
-  use Rack::Sendfile
-end
-
 use Rack::ShowExceptions
 
 # 1. Forget about stupid favicons
