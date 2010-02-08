@@ -7,8 +7,7 @@ module Imagery
     def call(env)
 
       [SvgGenerator, ImageVariantGenerator].each do |generator|
-        if image = generator.from_url(env['imagery.origin_host'], env['PATH_INFO'] + (env['QUERY_STRING'].empty? ? '' : "?#{env['QUERY_STRING']}"))
-
+        if image = generator.from_url(env['SERVER_NAME'].split('.')[1..-1].join('.'), env['PATH_INFO'] + (env['QUERY_STRING'].empty? ? '' : "?#{env['QUERY_STRING']}"))
           return send_file(image)
         end
       end
