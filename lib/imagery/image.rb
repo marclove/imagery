@@ -49,9 +49,7 @@ module Imagery
     def download(path_info)
       session.base_url = "http://#{server}"
 
-      response = Logger.current.info_with_time "Loading http://#{server}#{path_info}" do
-        session.get(path_info)
-      end
+      response = session.get(path_info)
 
       @path    = path_info.split('?')[0]
       @headers = response.headers
@@ -61,7 +59,6 @@ module Imagery
         self.content      = response.body
         true
       else
-        Logger.current.error "Not found"
         false
       end
     end

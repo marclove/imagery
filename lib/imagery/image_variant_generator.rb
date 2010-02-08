@@ -34,13 +34,10 @@ module Imagery
     def self.transform_content(image, variant)
       img = Magick::Image.from_blob(image.content).first
       transformation = Transformations[variant]
-
-      Logger.current.info_with_time "Transforming image to #{variant}" do
-        raise ArgumentError, "#{variant} is not a known transformation. (#{Transformations.list.join(', ')})" if transformation.nil?
-        img = transformation.call(img)
-        raise ArgumentError, "Creating variant #{variant} for #{path} produced an error. Please return a Magick::Image" if img.nil?
-        image.content = img.to_blob
-      end
+      raise ArgumentError, "#{variant} is not a known transformation. (#{Transformations.list.join(', ')})" if transformation.nil?
+      img = transformation.call(img)
+      raise ArgumentError, "Creating variant #{variant} for #{path} produced an error. Please return a Magick::Image" if img.nil?
+      image.content = img.to_blob
       true
     end
   end
