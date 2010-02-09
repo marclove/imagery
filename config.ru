@@ -6,7 +6,7 @@ require 'rack/contrib'
 $: << File.join(File.dirname(__FILE__), 'lib')
 require 'imagery'
 
-use Rack::Logger
+use Rack::CommonLogger
 
 use Rack::ShowExceptions
 
