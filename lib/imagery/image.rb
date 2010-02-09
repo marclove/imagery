@@ -56,7 +56,7 @@ module Imagery
       @status  = response.status
 
       if found?
-        self.content      = response.body
+        self.content = response.body
         true
       else
         false
