@@ -2,12 +2,11 @@
 
 require 'rubygems'
 require 'rack/contrib'
-require 'rackamole'
 
 $: << File.join(File.dirname(__FILE__), 'lib')
 require 'imagery'
 
-use Rack::Mole, { :app_name => "imagery", :user_key => :user_name }
+use Rack::Logger
 
 use Rack::ShowExceptions
 
