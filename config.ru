@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'rack/contrib'
+require 'rack/logger'
 
 $: << File.join(File.dirname(__FILE__), 'lib')
 require 'imagery'
