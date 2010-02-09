@@ -1,3 +1,4 @@
 patron
 memcached
 rack-contrib
+rack --version 1.1
